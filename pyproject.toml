@@ -1,0 +1,49 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airflow-provider-tdengine"
+authors = [
+    { name = "Nick Yao", email = "ipaddict@outlook.com" }
+]
+license = { text = "Apache License 2.0" }
+description = "The Apache Airflow provider package for TDengine built by Sciaiot."
+classifiers = [
+    "Framework :: Apache Airflow",
+    "Framework :: Apache Airflow :: Provider",
+]
+dynamic = [
+    "version"
+]
+requires-python = "~=3.12"
+dependencies = [
+    "apache-airflow>=2.9.2",
+    "taospy>=2.7.13"
+]
+
+[project.urls]
+Homepage = "https://scia-iot.com"
+Source = "https://github.com/scia-iot/airflow-providers-tdengine/"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.entry-points.apache_airflow_providers]
+provider_info = "airflow.providers.tdengine.__init__:get_provider_info"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.dynamic]
+version = { attr = "airflow.providers.tdengine.__version__" }
+
+[tool.setuptools.packages.find]
+exclude = [
+    "*tests.*",
+    "*tests"
+]
