@@ -3,7 +3,11 @@
 {
 	"name": "airflow-providers-tdengine",
 	"build": { "dockerfile": "Dockerfile" },
+
+	// Join the dev container network so that you can access TDengine server by hostname.
 	"runArgs": ["--network=dev"],
+
+	// Workaround for GIT inside DEV container.
 	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"]
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.

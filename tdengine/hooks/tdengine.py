@@ -120,7 +120,7 @@ class TDengineHook(BaseHook):
             status = True
             message = "TDengine is up & running."
         except taos.ConnectionError as e:
-            message = str(e)
+            message = str(e.msg)
             self.log.error(f"Connection to TDengine failed: {message}")
 
         return status, message
