@@ -11,7 +11,7 @@ authors = [
     { name = "Nick Yao", email = "ipaddict@outlook.com" }
 ]
 license = { text = "Apache License 2.0" }
-description = "The Apache Airflow provider package for TDengine built by Sciaiot."
+description = "The Apache Airflow provider package for TDengine built by SCIA IoT."
 classifiers = [
     "Framework :: Apache Airflow",
     "Framework :: Apache Airflow :: Provider",
@@ -22,7 +22,8 @@ dynamic = [
 requires-python = "~=3.12"
 dependencies = [
     "apache-airflow>=2.9.2",
-    "taospy>=2.7.13"
+    "taospy>=2.7.13",
+    "pytest-mock>=3.14.0",
 ]
 
 [project.urls]
