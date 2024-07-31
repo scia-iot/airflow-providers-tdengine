@@ -4,11 +4,13 @@ Unittest module to test Hooks.
 Requires the unittest, pytest Python libraries.
 
 Run test:
-    python -m unittest tests.hooks.test_tdengine.TestTDengineHook -v
+    python -m unittest tests.hooks.test_tdengine -v
 """
 
 import unittest
 from unittest import mock
+
+import taos
 
 from tdengine.hooks.tdengine import TDengineHook, fetch_last
 
@@ -40,3 +42,14 @@ class TestTDengineHook(unittest.TestCase):
 
         if "meters" not in stables:
             raise AssertionError("The table 'meters' not found!")
+
+    @mock.patch("taos.connect")
+    def test_fail_to_connect(self, mocker):
+        """ Test test_connection(). """
+        mocker.side_effect = taos.ConnectionError("Mocked connection error")
+
+        status, message = self.hook.test_connection()
+        assert status is False
+        assert message == "Mocked connection error"
+
+        mocker.reset_mock()
