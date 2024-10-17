@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/python:1-3.12-bullseye
 
+USER vscode
+
 ARG AIRFLOW_VERSION=2.9.2
 ARG TDENGINE_CLIENT_VERSION=3.3.0.0
 ARG TDENGINE_CLIENT_PLATFORM=Linux-arm64
@@ -15,8 +17,13 @@ RUN ./install_client.sh
 # Install airflow
 WORKDIR /home/vscode/airflow
 COPY --chown=vscode --chmod=0755 constraints.txt .
-RUN pip install 'apache-airflow==${AIRFLOW_VERSION}' --constraint constraints.txt
+RUN pip install apache-airflow==${AIRFLOW_VERSION} --constraint constraints.txt
 
 # Install other dependencies
 RUN pip install taospy
 RUN pip install pytest-mock
+RUN pip install build
+
+# Init & start airflow
+RUN python -m airflow db migrate
+ENTRYPOINT ["airflow standalone"]
