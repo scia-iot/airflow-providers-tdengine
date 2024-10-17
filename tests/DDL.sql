@@ -11,3 +11,5 @@ CREATE STABLE meters (
   groupId int, 
   remarks NCHAR(128)
 );
+
+CREATE TABLE meters_airflow_csv_import_test USING meters TAGS (1, 1, "Test only.");

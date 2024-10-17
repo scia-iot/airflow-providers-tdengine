@@ -9,7 +9,7 @@ from airflow.hooks.base import BaseHook
 from airflow.models import BaseOperator
 from airflow.utils.context import Context
 
-from tdengine.hooks.tdengine import TDengineHook
+from airflow.providers.tdengine.hooks.tdengine import TDengineHook
 
 
 class BaseTDengineOperator(BaseOperator):
@@ -45,10 +45,11 @@ class BaseTDengineOperator(BaseOperator):
     def _hook(self):
         conn_id = getattr(self, self.conn_id_field)
         self.log.info("Getting connection for %s.", conn_id)
-
         conn = BaseHook.get_connection(conn_id)
-        hook = TDengineHook(conn_id, connection=conn)
+        if self.database:
+            conn.schema = self.database
 
+        hook = TDengineHook(conn_id, connection=conn)
         if not isinstance(hook, TDengineHook):
             raise AirflowException(
                 f"You are trying to use `tdengine` with {
@@ -58,9 +59,6 @@ class BaseTDengineOperator(BaseOperator):
                 " a subclass of `tdengine.hooks.TDengineHook`."
                 f" Got {hook.__class__.__name__} Hook with class hierarchy"
             )
-
-        if self.database:
-            hook.schema = self.database
 
         return hook
 
