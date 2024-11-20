@@ -8,7 +8,11 @@
 	"runArgs": ["--network=dev"],
 
 	// Workaround for GIT inside DEV container.
-	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"]
+	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"],
+
+	"containerEnv": {
+		"PYTHONPATH": "/workspaces/airflow-providers-tdengine/airflow/providers"
+	}
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
