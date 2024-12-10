@@ -5,10 +5,16 @@ The Airflow Provider for [TDengine](https://github.com/taosdata/TDengine).
 
 ## Usage
 
-Build the package locally, or download the specific version from Packages, then install it on your Airflow environment.
+Build the package locally, and install it on your Airflow environment.
 
 ```shell
 pip install dist/apache_airflow_providers_tdengine-0.0.1-py3-none-any.whl
+```
+
+Or via PyPI:
+
+```shell
+pip install airflow-providers-tdengine
 ```
 
 Add a connection to Airflow via CLI:
@@ -58,14 +64,14 @@ In the root folder of project, run:
 ruff check 
 ```
 
-Or with [the Ruff extension](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) installed, run commands for opening python file.
+Or with [the Ruff extension](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) installed, run commands for any opening python file.
 
 ## Test
 
 In the root folder of project, run:
 
 ```shell
-pytest .
+pytest
 ```
 
 ## Build

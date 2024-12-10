@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "apache-airflow-providers-tdengine"
 authors = [
-    { name = "Nick Yao", email = "ipaddict@outlook.com" }
+    { name = "Nick Yao", email = "ipaddicting@gmail.com" }
 ]
 license = { text = "Apache License 2.0" }
 description = "The Apache Airflow provider package for TDengine built by SCIA IoT."
@@ -26,7 +26,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://scia-iot.com"
+Homepage = "https://github.com/scia-iot"
 Source = "https://github.com/scia-iot/airflow-providers-tdengine/"
 
 [project.readme]
