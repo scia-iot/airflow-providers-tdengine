@@ -16,7 +16,7 @@ from airflow.models import TaskInstance
 from airflow.utils.state import DagRunState, TaskInstanceState
 from airflow.utils.types import DagRunType
 
-from airflow.providers.tdengine.operators.tdengine import CSVImportOperator
+from sciaiot.airflow.providers.tdengine.operators.tdengine import CSVImportOperator
 
 DATA_INTERVAL_START = pendulum.datetime(2024, 7, 31, tz="UTC")
 DATA_INTERVAL_END = DATA_INTERVAL_START + datetime.timedelta(days=1)

@@ -9,7 +9,7 @@ from airflow.hooks.base import BaseHook
 from airflow.models import BaseOperator
 from airflow.utils.context import Context
 
-from airflow.providers.tdengine.hooks.tdengine import TDengineHook
+from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook
 
 
 class BaseTDengineOperator(BaseOperator):
@@ -56,7 +56,7 @@ class BaseTDengineOperator(BaseOperator):
                     hook.__class__.__name__},"
                 " but its provider does not support it. Please upgrade the provider"
                 " to a version that supports `tdengine`. The hook class should be"
-                " a subclass of `tdengine.hooks.TDengineHook`."
+                " a subclass of `sciaiot.airflow.providers.tdengine.hooks.TDengineHook`."
                 f" Got {hook.__class__.__name__} Hook with class hierarchy"
             )
 

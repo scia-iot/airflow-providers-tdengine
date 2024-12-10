@@ -12,7 +12,7 @@ def get_provider_info():
         "connection-types": [
             {
                 "connection-type": "tdengine",
-                "hook-class-name": "airflow.providers.tdengine.hooks.tdengine.TDengineHook"
+                "hook-class-name": "sciaiot.airflow.providers.tdengine.hooks.tdengine.TDengineHook"
             }
         ],
     }
