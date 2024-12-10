@@ -14,7 +14,7 @@ pip install dist/apache_airflow_providers_tdengine-0.0.1-py3-none-any.whl
 Or via PyPI:
 
 ```shell
-pip install airflow-providers-tdengine
+pip install apache-airflow-providers-tdengine
 ```
 
 Add a connection to Airflow via CLI:
