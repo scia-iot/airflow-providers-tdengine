@@ -1,5 +1,4 @@
 # Project Specific
-.github
 .vscode
 
 # Byte-compiled / optimized / DLL files
@@ -39,6 +38,9 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
+# Ruff stuff:
+.ruff_cache/
 
 # Unit test / coverage reports
 htmlcov/

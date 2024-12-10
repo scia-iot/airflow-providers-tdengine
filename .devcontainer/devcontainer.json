@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
 	"name": "airflow-providers-tdengine",
-	"build": { "dockerfile": "Dockerfile" },
+	"build": { "dockerfile": "Dockerfile", "context": ".." },
 
 	// Join the dev container network so that you can access TDengine server by hostname.
 	"runArgs": ["--network=dev"],

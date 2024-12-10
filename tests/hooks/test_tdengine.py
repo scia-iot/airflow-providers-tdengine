@@ -12,7 +12,7 @@ from unittest import mock
 
 import taos
 
-from airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_last
+from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_last
 
 
 @mock.patch.dict(
