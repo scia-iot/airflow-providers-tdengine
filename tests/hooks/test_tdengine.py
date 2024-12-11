@@ -1,12 +1,7 @@
 """
 Unittest module to test Hooks.
-
-Requires the unittest, pytest Python libraries.
-
-Run test:
-    python -m unittest tests.hooks.test_tdengine -v
 """
-
+import os
 import unittest
 from unittest import mock
 
@@ -15,10 +10,9 @@ import taos
 from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_last
 
 
-@mock.patch.dict(
-    "os.environ", 
-    AIRFLOW_CONN_TDENGINE="tdengine://root:taosdata@tdengine:6030/power"
-)
+TDENGINE_URI = os.getenv("TDENGINE_URI")
+
+@mock.patch.dict("os.environ", AIRFLOW_CONN_TDENGINE=TDENGINE_URI)
 class TestTDengineHook(unittest.TestCase):
     """
     Test TDengine Hook.

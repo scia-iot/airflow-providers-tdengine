@@ -14,7 +14,7 @@ pip install dist/apache_airflow_providers_tdengine-0.0.1-py3-none-any.whl
 Or via PyPI:
 
 ```shell
-pip install airflow-providers-tdengine
+pip install apache-airflow-providers-tdengine
 ```
 
 Add a connection to Airflow via CLI:
@@ -30,7 +30,6 @@ NOTICE: The client driver `taosc` must be installed since only native connector 
 
 ```python
 from sciaiot.airflow.providers.tdengine.operators.tdengine import BaseTDengineOperator
-import taos
 
 
 class CustomTDengineOperator(BaseOperator):
