@@ -30,7 +30,6 @@ NOTICE: The client driver `taosc` must be installed since only native connector 
 
 ```python
 from sciaiot.airflow.providers.tdengine.operators.tdengine import BaseTDengineOperator
-import taos
 
 
 class CustomTDengineOperator(BaseOperator):

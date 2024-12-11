@@ -1,11 +1,8 @@
 """
 Unittest module to test Operators.
-
-Run test:
-    python -m unittest tests.operators.test_tdengine -v
-
 """
 import datetime
+import os
 import unittest
 import uuid
 from unittest import mock
@@ -18,17 +15,14 @@ from airflow.utils.types import DagRunType
 
 from sciaiot.airflow.providers.tdengine.operators.tdengine import CSVImportOperator
 
+
+TDENGINE_URI = os.getenv("TDENGINE_URI")
 DATA_INTERVAL_START = pendulum.datetime(2024, 7, 31, tz="UTC")
 DATA_INTERVAL_END = DATA_INTERVAL_START + datetime.timedelta(days=1)
-
 TEST_DAG_ID = uuid.uuid4().hex
 TEST_TASK_ID = uuid.uuid4().hex
 
-
-@mock.patch.dict(
-    "os.environ",
-    AIRFLOW_CONN_TDENGINE="tdengine://root:taosdata@tdengine:6030/power"
-)
+@mock.patch.dict("os.environ", AIRFLOW_CONN_TDENGINE=TDENGINE_URI)
 class TestCSVImportOperator(unittest.TestCase):
     """
     Test CSVImportOperator.

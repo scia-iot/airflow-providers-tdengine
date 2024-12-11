@@ -11,7 +11,7 @@
 	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"],
 
 	"containerEnv": {
-		"PYTHONPATH": "/workspaces/airflow-providers-tdengine/airflow/providers"
+		"TDENGINE_URI": "tdengine://root:taosdata@tdengine:6030/power"
 	}
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.
