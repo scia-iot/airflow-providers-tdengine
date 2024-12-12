@@ -7,7 +7,7 @@ from unittest import mock
 
 import taos
 
-from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_last
+from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_all, fetch_last
 
 
 TDENGINE_URI = os.getenv("TDENGINE_URI")
@@ -28,14 +28,25 @@ class TestTDengineHook(unittest.TestCase):
         assert result[0] == 1
 
     def test_show_stables(self):
-        """ Run show_stables(). """
+        """ Run show stables. """
         stables = self.hook.run("SHOW STABLES", handler=fetch_last)
 
         assert stables is not None
         assert len(stables) >= 1
-
-        if "meters" not in stables:
-            raise AssertionError("The table 'meters' not found!")
+        assert "meters" in stables
+        
+    def test_describe_stable(self):
+        """ Run describe stable. """
+        fields = self.hook.run("DESCRIBE meters", handler=fetch_all)
+        
+        assert fields is not None
+        assert len(fields) >= 1
+        
+    def test_connection(self):
+        """ Test test_connection(). """
+        status, message = self.hook.test_connection()
+        assert status is True
+        assert message == "TDengine is up & running."
 
     @mock.patch("taos.connect")
     def test_fail_to_connect(self, mocker):
