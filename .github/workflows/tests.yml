@@ -41,7 +41,7 @@ jobs:
 
     - name: Type check with mypy
       run: |
-        mypy sciaiot
+        mypy .
 
     - name: Install TDengine
       run: |
@@ -61,7 +61,7 @@ jobs:
         
     - name: Run tests
       run: |
-        pytest --cov sciaiot --cov-report xml:coverage.xml
+        pytest --cov . --cov-report xml:coverage.xml
       env:
         TDENGINE_URI: tdengine://root:taosdata@localhost:6030/power
   

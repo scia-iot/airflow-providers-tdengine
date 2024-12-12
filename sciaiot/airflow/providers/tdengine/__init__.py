@@ -1,5 +1,5 @@
 """Module providing a function printing provider version."""
-__version__ = "0.0.1"
+__version__ = "0.1"
 
 
 def get_provider_info():
