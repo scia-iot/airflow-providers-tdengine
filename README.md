@@ -68,12 +68,20 @@ ruff check
 
 Or with [the Ruff extension](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) installed, run commands for any opening python file.
 
+### Type Check
+
+In the root folder of project, run:
+
+```shell
+mypy .
+```
+
 ## Test
 
 In the root folder of project, run:
 
 ```shell
-pytest
+pytest .
 ```
 
 ## Build
