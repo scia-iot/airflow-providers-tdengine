@@ -1,5 +1,9 @@
 # Airflow TDengine Provider
 
+[![Tests](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/tests.yml/badge.svg)](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/tests.yml)
+[![CodeQL Advanced](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/codeql.yml/badge.svg)](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/codeql.yml)
+[![Package](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/package.yml/badge.svg)](https://github.com/scia-iot/airflow-providers-tdengine/actions/workflows/package.yml)
+
 The Airflow Provider for [TDengine](https://github.com/taosdata/TDengine).
 
 ## Usage
