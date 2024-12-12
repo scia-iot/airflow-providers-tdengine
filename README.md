@@ -1,4 +1,3 @@
-
 # Airflow TDengine Provider
 
 The Airflow Provider for [TDengine](https://github.com/taosdata/TDengine).

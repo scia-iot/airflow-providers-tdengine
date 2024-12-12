@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Run Python Tests
+name: "Tests"
 
 on:
   push:
@@ -13,11 +13,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        python-version: ["3.12"]
-        airflow-version: ["2.9.2"]
-        tdengine-version: ["3.3.3.0"]
+        python-version: [ "3.12" ]
+        airflow-version: [ "2.9.2" ]
+        tdengine-version: [ "3.3.3.0" ]
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
     - uses: actions/checkout@v4
@@ -36,12 +39,16 @@ jobs:
     - name: Lint with Ruff
       uses: astral-sh/ruff-action@v2.0.0
 
+    - name: Type check with mypy
+      run: |
+        mypy sciaiot
+
     - name: Install TDengine
       run: |
+        mkdir /opt/tdengine-server && cd /opt/tdengine-server
         wget -qO tdengine-server.tar.gz https://www.taosdata.com/assets-download/3.0/TDengine-server-${{ matrix.tdengine-version}}-Linux-x64.tar.gz
-        mkdir tdengine-server
-        tar -xzf tdengine-server.tar.gz --directory tdengine-server --strip-components=1 && rm -f tdengine-server.tar.gz
-        cd tdengine-server && ./install.sh -e no
+        tar -xzf tdengine-server.tar.gz --directory . --strip-components=1 && rm -f tdengine-server.tar.gz
+        ./install.sh -e no
         ./start-all.sh
 
     - name: Init database
@@ -54,6 +61,12 @@ jobs:
         
     - name: Run tests
       run: |
-        pytest tests/
+        pytest --cov sciaiot --cov-report xml:coverage.xml
       env:
         TDENGINE_URI: tdengine://root:taosdata@localhost:6030/power
+  
+    - name: Get coverage
+      uses: orgoro/coverage@v3.2
+      with:
+        coverageFile: coverage.xml
+        token: ${{ secrets.GITHUB_TOKEN }}

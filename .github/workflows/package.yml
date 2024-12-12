@@ -6,11 +6,11 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Publish Python Package
+name: "Package"
 
 on:
   release:
-    types: [published]
+    types: [ published ]
 
 permissions:
   contents: read
