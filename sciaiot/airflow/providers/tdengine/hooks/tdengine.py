@@ -4,8 +4,7 @@ Module providing a hook to interactive with TDengine.
 
 import logging
 from contextlib import closing, contextmanager
-from typing import (Any, Callable, Iterable, List, Mapping, Sequence, TypeVar,
-                    cast)
+from typing import Any, Callable, Iterable, List, Mapping, Sequence, TypeVar, cast
 
 import taos
 from airflow.exceptions import AirflowException
@@ -19,7 +18,7 @@ logger = logging.getLogger(__name__)
 class TDengineHook(BaseHook):
     """Interact with TDengine."""
     conn_name_attr = "tdengine_conn_id"
-    default_conn_name = "tdengine_default_conn_id"
+    default_conn_name = "tdengine_default"
     conn_type = "tdengine"
     hook_name = "TDengine"
     schema = ""
@@ -129,8 +128,3 @@ class TDengineHook(BaseHook):
 def fetch_all(cursor: taos.TaosCursor) -> list[tuple]:
     """Fetch all data from cursor."""
     return cursor.fetchall()
-
-
-def fetch_last(cursor: taos.TaosCursor) -> tuple:
-    """Fetch the last data from cursor."""
-    return cursor.fetchall()[-1]

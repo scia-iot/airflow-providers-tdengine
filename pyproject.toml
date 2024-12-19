@@ -37,7 +37,10 @@ content-type = "text/markdown"
 provider_info = "sciaiot.airflow.providers.tdengine.__init__:get_provider_info"
 
 [tool.setuptools]
-include-package-data = false
+include-package-data = true
+
+[tool.setuptools.package-data]
+"sciaiot" = ["py.typed"]
 
 [tool.setuptools.dynamic]
 version = { attr = "sciaiot.airflow.providers.tdengine.__version__" }
