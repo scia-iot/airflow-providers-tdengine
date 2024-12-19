@@ -7,7 +7,7 @@ from unittest import mock
 
 import taos
 
-from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_all, fetch_last
+from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_all
 
 
 TDENGINE_URI = os.getenv("TDENGINE_URI")
@@ -22,18 +22,18 @@ class TestTDengineHook(unittest.TestCase):
 
     def test_server_status(self):
         """ Run server_status(). """
-        result = self.hook.run("SELECT server_status()", handler=fetch_last)
+        result = self.hook.run("SELECT server_status()", handler=fetch_all)
 
         assert result is not None
-        assert result[0] == 1
+        assert result[0][0] == 1
 
     def test_show_stables(self):
         """ Run show stables. """
-        stables = self.hook.run("SHOW STABLES", handler=fetch_last)
+        stables = self.hook.run("SHOW STABLES", handler=fetch_all)
 
         assert stables is not None
         assert len(stables) >= 1
-        assert "meters" in stables
+        assert "meters" in stables[0]
         
     def test_describe_stable(self):
         """ Run describe stable. """
