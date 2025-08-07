@@ -11,7 +11,8 @@
 	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"],
 
 	"containerEnv": {
-		"TDENGINE_URI": "tdengine://root:taosdata@tdengine:6030/power"
+		"TDENGINE_URI": "tdengine://root:taosdata@tdengine:6030/power",
+		"AIRFLOW__CORE__TEST_CONNECTION": "Enabled"
 	}
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.

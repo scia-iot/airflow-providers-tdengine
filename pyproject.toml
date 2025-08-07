@@ -6,7 +6,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "apache-airflow-providers-tdengine"
+name = "sciaiot-airflow-providers-tdengine"
 authors = [
     { name = "Nick Yao", email = "ipaddicting@gmail.com" }
 ]
@@ -21,8 +21,8 @@ dynamic = [
 ]
 requires-python = "~=3.12"
 dependencies = [
-    "apache-airflow>=2.9.2",
-    "taospy>=2.7.13",
+    "apache-airflow>=3.0.3",
+    "taospy>=2.8.3",
 ]
 
 [project.urls]
@@ -33,7 +33,7 @@ Source = "https://github.com/scia-iot/airflow-providers-tdengine/"
 file = "README.md"
 content-type = "text/markdown"
 
-[project.entry-points.apache_airflow_providers]
+[project.entry-points.apache_airflow_provider]
 provider_info = "sciaiot.airflow.providers.tdengine.__init__:get_provider_info"
 
 [tool.setuptools]
@@ -50,3 +50,6 @@ exclude = [
     "*tests.*",
     "*tests"
 ]
+
+[tool.pytest.ini_options]
+log_cli = true
