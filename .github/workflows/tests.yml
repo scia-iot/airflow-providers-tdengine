@@ -16,8 +16,8 @@ jobs:
       fail-fast: true
       matrix:
         python-version: [ "3.12" ]
-        airflow-version: [ "2.9.2" ]
-        tdengine-version: [ "3.3.3.0" ]
+        airflow-version: [ "3.0.3" ]
+        tdengine-version: [ "3.3.6.6" ]
     permissions:
       contents: write
       pull-requests: write

@@ -11,20 +11,25 @@ The Airflow Provider for [TDengine](https://github.com/taosdata/TDengine).
 Build the package locally, and install it on your Airflow environment.
 
 ```shell
-pip install dist/apache_airflow_providers_tdengine-0.0.1-py3-none-any.whl
+pip install dist/sciaiot_airflow_providers_tdengine-0.1.2-py3-none-any.whl
 ```
 
 Or via PyPI:
 
 ```shell
-pip install apache-airflow-providers-tdengine
+pip install sciaiot-airflow-providers-tdengine
 ```
 
 Add a connection to Airflow via CLI:
 
 ```shell
-airflow connections add 'tdengine_default' \
-  --conn-uri 'YOUR_CONN_URI_HERE'
+airflow connections add 'tdengine_default' --conn-uri 'tdengine://root:taosdata@tdengine:6030'
+```
+
+Test it:
+
+```shell
+airflow connections test tdengine_default
 ```
 
 NOTICE: The client driver `taosc` must be installed since only native connector i.e. `tdengine` is supported now.
@@ -84,10 +89,10 @@ In the root folder of project, run:
 pytest .
 ```
 
-## Build
+## Build & Install Locally
 
 In the root folder of project, run:
 
 ```shell
-python -m build
+pip install -e .
 ```

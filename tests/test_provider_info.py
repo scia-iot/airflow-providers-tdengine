@@ -13,4 +13,4 @@ class TestProviderInfo(unittest.TestCase):
     """ Run get_provider_info(). """
     info = get_provider_info()
     assert info is not None
-    assert info["package-name"] == "airflow-providers-tdengine"
+    assert info["package-name"] == "sciaiot-airflow-providers-tdengine"

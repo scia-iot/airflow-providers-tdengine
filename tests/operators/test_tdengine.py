@@ -1,7 +1,6 @@
 """
 Unittest module to test Operators.
 """
-import datetime
 import os
 import unittest
 import uuid
@@ -11,16 +10,16 @@ import pendulum
 from airflow import DAG
 from airflow.models import TaskInstance
 from airflow.utils.state import DagRunState, TaskInstanceState
-from airflow.utils.types import DagRunType
+from airflow.utils.types import DagRunTriggeredByType, DagRunType
 
 from sciaiot.airflow.providers.tdengine.operators.tdengine import CSVImportOperator
 
 
 TDENGINE_URI = os.getenv("TDENGINE_URI")
-DATA_INTERVAL_START = pendulum.datetime(2024, 7, 31, tz="UTC")
-DATA_INTERVAL_END = DATA_INTERVAL_START + datetime.timedelta(days=1)
+START_DATE = pendulum.datetime(2024, 7, 31, tz="UTC")
 TEST_DAG_ID = uuid.uuid4().hex
 TEST_TASK_ID = uuid.uuid4().hex
+TEST_RUN_ID = uuid.uuid4().hex
 
 @mock.patch.dict("os.environ", AIRFLOW_CONN_TDENGINE=TDENGINE_URI)
 class TestCSVImportOperator(unittest.TestCase):
@@ -31,7 +30,7 @@ class TestCSVImportOperator(unittest.TestCase):
         with DAG(
             dag_id=TEST_DAG_ID,
             schedule="@daily",
-            start_date=DATA_INTERVAL_START
+            start_date=START_DATE
         ) as dag:
             CSVImportOperator(
                 task_id=TEST_TASK_ID,
@@ -44,12 +43,12 @@ class TestCSVImportOperator(unittest.TestCase):
 
     def test_execute_manually(self):
         """ Test execute() manually."""
-        dagrun = self.dag.create_dagrun(
-            state=DagRunState.RUNNING,
-            execution_date=DATA_INTERVAL_START,
-            data_interval=(DATA_INTERVAL_START, DATA_INTERVAL_END),
-            start_date=DATA_INTERVAL_END,
+        dagrun = self.dag.create_dagrun(           
+            run_id=TEST_RUN_ID,
             run_type=DagRunType.MANUAL,
+            run_after=START_DATE,
+            triggered_by=DagRunTriggeredByType.TIMETABLE,
+            state=DagRunState.RUNNING,
         )
 
         ti = dagrun.get_task_instance(TEST_TASK_ID)
