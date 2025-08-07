@@ -89,7 +89,15 @@ In the root folder of project, run:
 pytest .
 ```
 
-## Build & Install Locally
+## Install
+
+In the root folder of project, run:
+
+```shell
+pip install -e .
+```
+
+## Build Locally
 
 In the root folder of project, run:
 
