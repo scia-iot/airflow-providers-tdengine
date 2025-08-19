@@ -46,6 +46,7 @@ include-package-data = true
 version = { attr = "sciaiot.airflow.providers.tdengine.__version__" }
 
 [tool.setuptools.packages.find]
+where = ["src"]
 exclude = [
     "*tests.*",
     "*tests"

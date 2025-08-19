@@ -97,10 +97,10 @@ In the root folder of project, run:
 pip install -e .
 ```
 
-## Build Locally
+## Build
 
 In the root folder of project, run:
 
 ```shell
-pip install -e .
+python -m build
 ```
