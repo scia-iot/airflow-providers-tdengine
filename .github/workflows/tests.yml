@@ -61,6 +61,7 @@ jobs:
         
     - name: Run tests
       run: |
+        pip install -e .
         pytest --cov . --cov-report xml:coverage.xml
       env:
         TDENGINE_URI: tdengine://root:taosdata@localhost:6030/power
