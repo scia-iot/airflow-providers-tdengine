@@ -81,14 +81,6 @@ In the root folder of project, run:
 mypy .
 ```
 
-## Test
-
-In the root folder of project, run:
-
-```shell
-pytest .
-```
-
 ## Install
 
 In the root folder of project, run:
@@ -97,7 +89,21 @@ In the root folder of project, run:
 pip install -e .
 ```
 
+## Test
+
+In the root folder of project, run:
+
+```shell
+pytest .
+```
+
 ## Build
+
+Add `build` package:
+
+```shell
+pip install build
+```
 
 In the root folder of project, run:
 
