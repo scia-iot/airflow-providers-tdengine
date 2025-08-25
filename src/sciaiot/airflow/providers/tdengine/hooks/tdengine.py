@@ -9,7 +9,7 @@ from typing import Any, Callable, Iterable, List, Mapping, Sequence, TypeVar, ca
 import taos
 from airflow.exceptions import AirflowException
 from airflow.hooks.base import BaseHook
-from airflow.models import Connection
+from airflow.sdk import Connection
 
 T = TypeVar("T")
 logger = logging.getLogger(__name__)

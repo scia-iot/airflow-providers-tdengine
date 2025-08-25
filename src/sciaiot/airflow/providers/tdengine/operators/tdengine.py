@@ -9,7 +9,21 @@ from airflow.hooks.base import BaseHook
 from airflow.models import BaseOperator
 from airflow.utils.context import Context
 
-from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook
+from sciaiot.airflow.providers.tdengine.hooks.tdengine import TDengineHook, fetch_all
+
+
+TDENGINE_TO_PYTHON_TYPE_MAP = {
+    "TIMESTAMP": "datetime",
+    "INT": "int",
+    "BIGINT": "int",
+    "FLOAT": "float",
+    "DOUBLE": "float",
+    "BINARY": "str",
+    "SMALLINT": "int",
+    "TINYINT": "int",
+    "BOOL": "bool",
+    "NCHAR": "str",
+}
 
 
 class BaseTDengineOperator(BaseOperator):
@@ -78,6 +92,42 @@ class BaseTDengineOperator(BaseOperator):
     def execute(self, context: Context) -> Any:
         raise NotImplementedError
 
+
+class STableDescribeOperator(BaseTDengineOperator):
+    """Describe a super table in TDengine."""
+
+    def __init__(
+        self,
+        *,
+        stable_name: str,
+        conn_id: str | None = None,
+        database: str | None = None,
+        **kwargs,
+    ) -> None:
+        super().__init__(conn_id=conn_id, database=database, **kwargs)
+        self.stable_name = stable_name
+        self.statement = f"DESCRIBE {self.stable_name}"
+
+    def execute(self, context: Context) -> list[dict[str, Any]]:
+        self.log.info("Executing: %s", self.statement)
+
+        hook = self.get_hook()
+        results = hook.run(statement=self.statement, handler=fetch_all)
+
+        if not results:
+            return []
+
+        columns = [
+            {
+                "name": row[0],
+                "type": TDENGINE_TO_PYTHON_TYPE_MAP.get(row[1].upper()),
+                "length": row[2],
+            }
+            for row in results
+        ]
+
+        self.log.info("Columns: %s", columns)
+        return columns
 
 
 class CSVImportOperator(BaseTDengineOperator):
