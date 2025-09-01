@@ -97,24 +97,25 @@ class BaseTDengineOperator(BaseOperator):
 
 class STableDescribeOperator(BaseTDengineOperator):
     """Describe a super table in TDengine."""
+    template_fields: Sequence[str] = (*BaseTDengineOperator.template_fields, "stable_name")
 
     def __init__(
         self,
         *,
-        stable_name: str,
         conn_id: str | None = None,
         database: str | None = None,
+        stable_name: str,
         **kwargs,
     ) -> None:
         super().__init__(conn_id=conn_id, database=database, **kwargs)
         self.stable_name = stable_name
-        self.statement = f"DESCRIBE {self.stable_name}"
 
     def execute(self, context: Context) -> list[dict[str, Any]]:
-        self.log.info("Executing: %s", self.statement)
+        statement = f"DESCRIBE {self.stable_name}"
+        self.log.info("Executing: %s", statement)
 
         hook = self.get_hook()
-        results = hook.run(statement=self.statement, handler=fetch_all)
+        results = hook.run(statement=statement, handler=fetch_all)
 
         if not results:
             return []
@@ -135,24 +136,28 @@ class STableDescribeOperator(BaseTDengineOperator):
 class CSVImportOperator(BaseTDengineOperator):
     """Exporting data to TDengine from a CSV. """
 
+    template_fields: Sequence[str] = (*BaseTDengineOperator.template_fields, "table_name", "filepath")
+
     def __init__(
         self,
         *,
-        table_name: str,
-        filepath: str,
         conn_id: str | None = None,
         database: str | None = None,
-        **kwargs
+        table_name: str,
+        filepath: str,
+        **kwargs,
     ) -> None:
         super().__init__(conn_id=conn_id, database=database, **kwargs)
-        self.statement = f"INSERT INTO {table_name} FILE '{filepath}'"
-    
+        self.table_name = table_name
+        self.filepath = filepath
+
     def execute(self, context: Context) -> int:
-        self.log.info("Executing: %s", self.statement)
-        
+        statement = f"INSERT INTO {self.table_name} FILE '{self.filepath}'"
+        self.log.info("Executing: %s", statement)
+
         hook = self.get_hook()
-        hook.run(statement=self.statement)
+        hook.run(statement=statement)
         imported_records = hook.affected_rows
-        
+
         self.log.info("Imported records: %s", imported_records)
         return imported_records
