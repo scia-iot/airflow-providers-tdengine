@@ -8,7 +8,7 @@
 	"runArgs": ["--network=dev"],
 
 	// Workaround for GIT inside DEV container.
-	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"],
+	"mounts": ["type=bind,source=${localEnv:HOME}/.ssh,target=/home/airflow/.ssh,readonly"],
 
 	"containerEnv": {
 		"TDENGINE_URI": "tdengine://root:taosdata@tdengine:6030/power",
@@ -22,11 +22,11 @@
 	"forwardPorts": [8080],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip install -e ."
+	"postCreateCommand": "pip install -e .",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "airflow"
 }

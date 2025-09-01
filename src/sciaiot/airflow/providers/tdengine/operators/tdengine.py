@@ -18,11 +18,13 @@ TDENGINE_TO_PYTHON_TYPE_MAP = {
     "BIGINT": "int",
     "FLOAT": "float",
     "DOUBLE": "float",
-    "BINARY": "str",
+    "BINARY": "bytes",
     "SMALLINT": "int",
     "TINYINT": "int",
     "BOOL": "bool",
-    "NCHAR": "str",
+    "NCHAR": "bytes",
+    "VARCHAR": "bytes",
+    "JSON": "str",
 }
 
 
