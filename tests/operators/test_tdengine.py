@@ -70,7 +70,7 @@ class TestSTableDescribeOperator(unittest.TestCase):
             {"name": "phase", "type": "float", "length": 4},
             {"name": "location", "type": "int", "length": 1},
             {"name": "groupid", "type": "int", "length": 4},
-            {'name': 'remarks', 'type': 'str', 'length': 128},
+            {'name': 'remarks', 'type': 'bytes', 'length': 128},
         ]
 
         self.assertEqual(columns, expected_columns)
