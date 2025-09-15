@@ -125,6 +125,7 @@ class STableDescribeOperator(BaseTDengineOperator):
                 "name": row[0],
                 "type": TDENGINE_TO_PYTHON_TYPE_MAP.get(row[1].upper()),
                 "length": row[2],
+                "note": row[3],
             }
             for row in results
         ]
