@@ -64,13 +64,13 @@ class TestSTableDescribeOperator(unittest.TestCase):
         columns = ti.xcom_pull(task_ids=TEST_STD_TASK_ID, key="return_value")
 
         expected_columns = [
-            {"name": "ts", "type": "datetime", "length": 8},
-            {"name": "current", "type": "float", "length": 4},
-            {"name": "voltage", "type": "int", "length": 4},
-            {"name": "phase", "type": "float", "length": 4},
-            {"name": "location", "type": "int", "length": 1},
-            {"name": "groupid", "type": "int", "length": 4},
-            {'name': 'remarks', 'type': 'bytes', 'length': 128},
+            {"name": "ts", "type": "datetime", "length": 8, "note": ""},
+            {"name": "current", "type": "float", "length": 4, "note": ""},
+            {"name": "voltage", "type": "int", "length": 4, "note": ""},
+            {"name": "phase", "type": "float", "length": 4, "note": ""},
+            {"name": "location", "type": "int", "length": 1, "note": "TAG"},
+            {"name": "groupid", "type": "int", "length": 4, "note": "TAG"},
+            {'name': 'remarks', 'type': 'bytes', 'length': 128, "note": "TAG"},
         ]
 
         self.assertEqual(columns, expected_columns)
